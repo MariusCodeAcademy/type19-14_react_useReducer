@@ -15,15 +15,18 @@ function counterReducer(state, action) {
   console.log('state in reducer ===', state);
 
   // pakeisti else if i switch
-  if (action.type === 'UP') {
-    return { value: state.value + 1 };
-  } else if (action.type === 'DOWN') {
-    return { value: state.value - 1 };
-  } else if (action.type === 'RESET') {
-    return initState;
-  }
+  switch (action.type) {
+    case 'UP':
+      return { value: state.value + 1 };
+    case 'DOWN':
+      return { value: state.value - 1 };
+    case 'RESET':
+      return initState;
 
-  return state;
+    default:
+      console.warn('nerastas toks action type ', action.type);
+      return state;
+  }
 }
 
 export default function CounterBetter() {
