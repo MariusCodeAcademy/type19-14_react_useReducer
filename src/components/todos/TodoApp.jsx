@@ -44,20 +44,20 @@ export default function TodoApp() {
   const [state, dispach] = useReducer(todoReducer, initTodos);
   const [newTodoVal, setNewTodoVal] = useState('');
   console.log('state ===', state);
-  // console.log('newTodoVal ===', newTodoVal);
-  function handleDelete(idToDelete) {
-    dispach({ type: 'DEL', payload: idToDelete });
-  }
 
-  function handleNewTodo() {
+  const handleDelete = (idToDelete) => {
+    dispach({ type: 'DEL', payload: idToDelete });
+  };
+
+  const handleNewTodo = () => {
     console.log('ivesta reiksme', newTodoVal);
     dispach({ type: 'ADD', payload: newTodoVal });
-  }
+  };
 
-  function handleDone(idToToggle) {
+  const handleDone = (idToToggle) => {
     console.log('handleDone', idToToggle);
     dispach({ type: 'TOGGLE', payload: idToToggle });
-  }
+  };
 
   return (
     <div>
