@@ -12,17 +12,23 @@ const initTodos = [
 
 let countId = 5;
 
+const ACT = {
+  del: 'DEL',
+  add: 'ADD',
+  toggle: 'TOGGLE',
+};
+
 function todoReducer(state, action) {
   console.log('action ===', action);
   switch (action.type) {
-    case 'DEL':
+    case ACT.del:
       const idToDelete = action.payload;
       const filtered = state.filter((pObj) => pObj.id !== idToDelete);
       return filtered;
-    case 'ADD':
+    case ACT.add:
       return [...state, { id: countId++, title: action.payload, isDone: false }];
     // pasidaryti make done (sunkesnis)
-    case 'TOGGLE':
+    case ACT.toggle:
       const idToToggle = action.payload;
       return state.map((pObj) => {
         // ar radom ta objekta kuri pakeisti?
@@ -46,17 +52,18 @@ export default function TodoApp() {
   console.log('state ===', state);
 
   const handleDelete = (idToDelete) => {
-    dispach({ type: 'DEL', payload: idToDelete });
+    dispach({ type: ACT.del, payload: idToDelete });
   };
 
   const handleNewTodo = () => {
     console.log('ivesta reiksme', newTodoVal);
-    dispach({ type: 'ADD', payload: newTodoVal });
+    dispach({ type: ACT.add, payload: newTodoVal });
+    setNewTodoVal('');
   };
 
   const handleDone = (idToToggle) => {
     console.log('handleDone', idToToggle);
-    dispach({ type: 'TOGGLE', payload: idToToggle });
+    dispach({ type: ACT.toggle, payload: idToToggle });
   };
 
   return (
