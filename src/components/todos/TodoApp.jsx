@@ -20,6 +20,7 @@ function todoReducer(state, action) {
       return filtered;
     case 'ADD':
       return [...state, { id: countId++, title: action.payload, isDone: false }];
+    // pasidaryti make done (sunkesnis)
     default:
       console.warn('type nerstas', action);
       return state;
@@ -66,6 +67,7 @@ export default function TodoApp() {
               {tObj.isDone ? ' Done' : ' NOT Done'}
             </span>{' '}
             <Button onClick={() => handleDelete(tObj.id)}>Delete</Button>
+            <Button outline>Complete | Undo</Button>
           </li>
         ))}
       </ul>
