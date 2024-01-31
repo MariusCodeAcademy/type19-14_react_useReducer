@@ -44,7 +44,6 @@ export default function CounterBetter() {
   }
 
   function reset() {
-    // dispatch reset
     dispatch({ type: 'RESET' });
   }
 
@@ -54,10 +53,12 @@ export default function CounterBetter() {
 
   // padaryti po kortele inputa kuri ivedant keistume <h3 className='text-lg mb-4'>Push ups</h3> reiksme
 
+  const isNegative = state.value < 0 ? 'text-red-500' : '';
+
   return (
     <div className='inline-block rounded-md bg-indigo-50/50 border-indigo-300 border px-3 py-2 text-center shadow-md'>
       <h3 className='text-lg mb-4'>Better</h3>
-      <p className='text-5xl mb-5'>{state.value}</p>
+      <p className={`text-5xl mb-5 ${isNegative}`}>{state.value}</p>
       <div className='flex gap-3'>
         <button onClick={goUp} className={btnNormal}>
           Up
