@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useReducer } from 'react';
 
 const btnNormal =
   'bg-indigo-500 text-white px-6 py-2 text-sm uppercase border font-semibold border-indigo-500 rounded-md';
@@ -9,33 +9,19 @@ const initState = {
   value: 0,
 };
 
+function counterReducer(state, action) {}
+
 export default function CounterBetter() {
-  const [state, setState] = useState(initState);
+  // const [state, setState] = useState(initState);
+  const [state, dispatch] = useReducer(counterReducer, initState);
   console.log('state ===', state);
-  function goUp() {
-    // padidinam state 1
-    // setState(state + 1);
-    // const newState = { value: state.value + 1 }
-    setState((prevState) => {
-      return { value: prevState.value + 1 };
-    });
-  }
-  function goDown() {
-    // pamazinam state 1
-    setState({
-      value: state.value - 1,
-    });
-  }
 
-  function reset() {
-    setState(initState);
-  }
+  function goUp() {}
+  function goDown() {}
 
-  function upByValue(howMuch) {
-    setState({
-      value: state.value + howMuch,
-    });
-  }
+  function reset() {}
+
+  function upByValue(howMuch) {}
 
   // padaryti po kortele inputa kuri ivedant keistume <h3 className='text-lg mb-4'>Push ups</h3> reiksme
 
