@@ -22,6 +22,8 @@ function counterReducer(state, action) {
       return { value: state.value - 1 };
     case 'RESET':
       return initState;
+    case 'UP_BY':
+      return { value: state.value + action.payload };
 
     default:
       console.warn('nerastas toks action type ', action.type);
@@ -46,7 +48,9 @@ export default function CounterBetter() {
     dispatch({ type: 'RESET' });
   }
 
-  function upByValue(howMuch) {}
+  function upByValue(howMuch) {
+    dispatch({ type: 'UP_BY', payload: howMuch });
+  }
 
   // padaryti po kortele inputa kuri ivedant keistume <h3 className='text-lg mb-4'>Push ups</h3> reiksme
 
