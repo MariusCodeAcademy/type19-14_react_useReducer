@@ -13,7 +13,7 @@ const initTodos = [
 let countId = 5;
 
 const ACT = {
-  del: 'DEL',
+  DEL: 'DEL',
   add: 'ADD',
   toggle: 'TOGGLE',
 };
@@ -21,7 +21,7 @@ const ACT = {
 function todoReducer(state, action) {
   console.log('action ===', action);
   switch (action.type) {
-    case ACT.del:
+    case ACT.DEL:
       const idToDelete = action.payload;
       const filtered = state.filter((pObj) => pObj.id !== idToDelete);
       localStorage.setItem('todos', JSON.stringify(filtered));
@@ -55,7 +55,7 @@ export default function TodoApp() {
   console.log('state ===', state);
 
   const handleDelete = (idToDelete) => {
-    dispach({ type: ACT.del, payload: idToDelete });
+    dispach({ type: ACT.DEL, payload: idToDelete });
   };
 
   const handleNewTodo = () => {
