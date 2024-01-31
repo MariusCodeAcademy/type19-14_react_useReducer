@@ -9,17 +9,39 @@ const initState = {
   value: 0,
 };
 
-function counterReducer(state, action) {}
+function counterReducer(state, action) {
+  console.log('counterReducer ran');
+  console.log('action ===', action);
+  console.log('state in reducer ===', state);
+
+  // pakeisti else if i switch
+  if (action.type === 'UP') {
+    return { value: state.value + 1 };
+  } else if (action.type === 'DOWN') {
+    return { value: state.value - 1 };
+  } else if (action.type === 'RESET') {
+    return initState;
+  }
+
+  return state;
+}
 
 export default function CounterBetter() {
   // const [state, setState] = useState(initState);
   const [state, dispatch] = useReducer(counterReducer, initState);
   console.log('state ===', state);
 
-  function goUp() {}
-  function goDown() {}
+  function goUp() {
+    dispatch({ type: 'UP' });
+  }
+  function goDown() {
+    dispatch({ type: 'DOWN' });
+  }
 
-  function reset() {}
+  function reset() {
+    // dispatch reset
+    dispatch({ type: 'RESET' });
+  }
 
   function upByValue(howMuch) {}
 
