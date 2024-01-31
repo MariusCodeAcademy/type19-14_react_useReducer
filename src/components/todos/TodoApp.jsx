@@ -24,12 +24,14 @@ function todoReducer(state, action) {
     case ACT.del:
       const idToDelete = action.payload;
       const filtered = state.filter((pObj) => pObj.id !== idToDelete);
+      localStorage.setItem('todos', JSON.stringify(filtered));
       return filtered;
     case ACT.add:
       return [...state, { id: countId++, title: action.payload, isDone: false }];
     // pasidaryti make done (sunkesnis)
     case ACT.toggle:
       const idToToggle = action.payload;
+
       return state.map((pObj) => {
         // ar radom ta objekta kuri pakeisti?
         if (pObj.id === idToToggle) {
@@ -47,6 +49,7 @@ function todoReducer(state, action) {
 }
 
 export default function TodoApp() {
+  // pasitikrinti ar turiu todos localStorage, jei turiu imu is storage, jei ne initTodos
   const [state, dispach] = useReducer(todoReducer, initTodos);
   const [newTodoVal, setNewTodoVal] = useState('');
   console.log('state ===', state);
