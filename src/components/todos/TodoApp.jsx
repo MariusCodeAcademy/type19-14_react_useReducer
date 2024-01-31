@@ -75,9 +75,9 @@ export default function TodoApp() {
         </Button>
       </div>
 
-      <ul className='flex flex-col gap-3'>
+      <ul className='flex flex-col gap-3 '>
         {state.map((tObj) => (
-          <li key={tObj.id}>
+          <li className='grid grid-cols-4 gap-2' key={tObj.id}>
             <span
               className={
                 'font-semibold text-lg ' + `${tObj.isDone ? 'line-through text-gray-400' : ''}`
