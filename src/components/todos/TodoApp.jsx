@@ -69,6 +69,8 @@ export default function TodoApp() {
     dispach({ type: ACT.toggle, payload: idToToggle });
   };
 
+  const handleUpdate = () => {};
+
   return (
     <div>
       <h2 className='text-2xl mb-10'>TodoApp</h2>
