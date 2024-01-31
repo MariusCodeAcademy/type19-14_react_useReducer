@@ -16,8 +16,8 @@ export default function Counter() {
     // padidinam state 1
     // setState(state + 1);
     // const newState = { value: state.value + 1 }
-    setState({
-      value: state.value + 1,
+    setState((prevState) => {
+      return { value: prevState.value + 1 };
     });
   }
   function goDown() {
@@ -31,6 +31,12 @@ export default function Counter() {
     setState(initState);
   }
 
+  function upByValue(howMuch) {
+    setState({
+      value: state.value + howMuch,
+    });
+  }
+
   // padaryti po kortele inputa kuri ivedant keistume <h3 className='text-lg mb-4'>Push ups</h3> reiksme
 
   return (
@@ -40,6 +46,9 @@ export default function Counter() {
       <div className='flex gap-3'>
         <button onClick={goUp} className={btnNormal}>
           Up
+        </button>
+        <button onClick={() => upByValue(5)} className={btnNormal}>
+          Up by 5
         </button>
         <button onClick={goDown} className={btnNormal}>
           Down
