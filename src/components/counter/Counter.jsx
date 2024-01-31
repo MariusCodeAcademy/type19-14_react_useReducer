@@ -10,23 +10,25 @@ const initState = {
 };
 
 export default function Counter() {
-  const [state, setState] = useState(0);
-
+  const [state, setState] = useState(initState);
+  console.log('state ===', state);
   function goUp() {
     // padidinam state 1
-    setState(state + 1);
-    // jei state nauja reiksme priklauso nuo pries tai buvusios,
-    // state turetu buti atnaujinamas su argumentu kaip funkcija
-    // TODO: async setTimeout case !!!
+    // setState(state + 1);
+    // const newState = { value: state.value + 1 }
+    setState({
+      value: state.value + 1,
+    });
   }
   function goDown() {
     // pamazinam state 1
-    setState(state - 1);
+    setState({
+      value: state.value - 1,
+    });
   }
 
   function reset() {
-    // pamazinam state 1
-    setState(0);
+    setState(initState);
   }
 
   // padaryti po kortele inputa kuri ivedant keistume <h3 className='text-lg mb-4'>Push ups</h3> reiksme
@@ -34,7 +36,7 @@ export default function Counter() {
   return (
     <div className='inline-block rounded-md bg-indigo-50/50 border-indigo-300 border px-3 py-2 text-center shadow-md'>
       <h3 className='text-lg mb-4'>Push ups</h3>
-      <p className='text-5xl mb-5'>{state}</p>
+      <p className='text-5xl mb-5'>{state.value}</p>
       <div className='flex gap-3'>
         <button onClick={goUp} className={btnNormal}>
           Up
