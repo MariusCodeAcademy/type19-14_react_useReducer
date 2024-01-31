@@ -5,8 +5,8 @@ import Button from '../counter/UI/Button';
 const initTodos = [
   { id: 1, title: 'Pull ups', isDone: false },
   { id: 2, title: 'Read a book', isDone: true },
-  { id: 3, title: 'Buy Bread', isDone: false },
-  { id: 4, title: 'Buy Bread', isDone: false }, // id to dele
+  { id: 3, title: 'Buy Bread', isDone: false }, // idToToggle === 3
+  { id: 4, title: 'Buy Bread', isDone: true }, // id to dele
 ];
 
 let countId = 5;
@@ -21,6 +21,18 @@ function todoReducer(state, action) {
     case 'ADD':
       return [...state, { id: countId++, title: action.payload, isDone: false }];
     // pasidaryti make done (sunkesnis)
+    case 'TOGGLE':
+      const idToToggle = action.payload;
+      return state.map((pObj) => {
+        // ar radom ta objekta kuri pakeisti?
+        if (pObj.id === idToToggle) {
+          // grazinti kopija su pakeitimu
+          return { ...pObj, isDone: !pObj.isDone };
+        } else {
+          // grazinti ta pati objekta
+          return pObj;
+        }
+      });
     default:
       console.warn('type nerstas', action);
       return state;
@@ -39,6 +51,11 @@ export default function TodoApp() {
   function handleNewTodo() {
     console.log('ivesta reiksme', newTodoVal);
     dispach({ type: 'ADD', payload: newTodoVal });
+  }
+
+  function handleDone(idToToggle) {
+    console.log('handleDone', idToToggle);
+    dispach({ type: 'TOGGLE', payload: idToToggle });
   }
 
   return (
@@ -61,13 +78,21 @@ export default function TodoApp() {
       <ul className='flex flex-col gap-3'>
         {state.map((tObj) => (
           <li key={tObj.id}>
-            <span className='font-semibold text-lg'> {tObj.title}</span>
+            <span
+              className={
+                'font-semibold text-lg ' + `${tObj.isDone ? 'line-through text-gray-400' : ''}`
+              }>
+              {' '}
+              {tObj.title}
+            </span>
             <span>
               - is
               {tObj.isDone ? ' Done' : ' NOT Done'}
             </span>{' '}
             <Button onClick={() => handleDelete(tObj.id)}>Delete</Button>
-            <Button outline>Complete | Undo</Button>
+            <Button onClick={() => handleDone(tObj.id)} outline>
+              {tObj.isDone ? 'Undo' : 'Complete'}
+            </Button>
           </li>
         ))}
       </ul>
