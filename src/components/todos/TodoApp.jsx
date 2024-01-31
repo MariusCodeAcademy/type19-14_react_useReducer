@@ -79,23 +79,6 @@ export default function TodoApp() {
       <ul className='flex flex-col gap-3 '>
         {state.map((tObj) => (
           <OneTodo onDelete={handleDelete} onDone={handleDone} key={tObj.id} item={tObj} />
-          // <li className='grid grid-cols-4 gap-2' key={tObj.id}>
-          //   <span
-          //     className={
-          //       'font-semibold text-lg ' + `${tObj.isDone ? 'line-through text-gray-400' : ''}`
-          //     }>
-          //     {' '}
-          //     {tObj.title}
-          //   </span>
-          //   <span>
-          //     - is
-          //     {tObj.isDone ? ' Done' : ' NOT Done'}
-          //   </span>{' '}
-          //   <Button onClick={() => handleDelete(tObj.id)}>Delete</Button>
-          //   <Button onClick={() => handleDone(tObj.id)} outline>
-          //     {tObj.isDone ? 'Undo' : 'Complete'}
-          //   </Button>
-          // </li>
         ))}
       </ul>
     </div>
