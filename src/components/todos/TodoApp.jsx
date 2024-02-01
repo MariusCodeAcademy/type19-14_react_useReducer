@@ -1,6 +1,5 @@
 /* eslint-disable no-case-declarations */
 import { useReducer, useState } from 'react';
-import Button from '../counter/UI/Button';
 import OneTodo from './OneTodo';
 import AddTodo from './AddTodo';
 
@@ -71,11 +70,27 @@ export default function TodoApp() {
 
   const handleUpdate = () => {};
 
+  const all = state.length;
+
+  const complete = state.filter((tObj) => tObj.isDone).length;
+
   return (
     <div>
-      <h2 className='text-2xl mb-10'>TodoApp</h2>
+      <div className='flex justify-between mb-4'>
+        <h2 className='text-2xl mb-10'>TodoApp</h2>
+        <p className='font-bold text-2xl p-4 border border-sky-600 rounded-md'>
+          {complete}
+          <span className='font-normal'>/{all}</span>
+        </p>
+      </div>
 
       <AddTodo onNewTodo={handleNewTodo} />
+
+      {state.length === 0 && (
+        <p className='text-2xl text-center p-5 border border-indigo-600'>
+          There are no todos, please add some
+        </p>
+      )}
 
       <ul className='flex flex-col gap-3 '>
         {state.map((tObj) => (
